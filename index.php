@@ -1,4 +1,24 @@
 <?php
+#--------------------------------------------------------------------------------------------------
+	function panggilLink()
+	{
+		//define ('URL', dirname('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF']));
+		define ('URL', $_SERVER['SCRIPT_NAME']);
+		$link = array('index/utama/',
+			'index/bulan/',
+			'index/suhu/',
+			'user/baru/',
+			'user/ubah/',
+			'user/buang/'
+		);
+
+		foreach($link as $url):
+			echo '<hr><a target="_blank" href="' . URL . '/' . $url . '">'
+			. $url . '</a>';
+		endforeach;
+		#
+	}
+#--------------------------------------------------------------------------------------------------
 ###################################################################################################
 # fungsi global
 #--------------------------------------------------------------------------------------------------
@@ -34,15 +54,21 @@
 	}
 #--------------------------------------------------------------------------------------------------
 ###################################################################################################
-$url = '<hr>' . $_SERVER['SCRIPT_NAME'];
+#--------------------------------------------------------------------------------------------------
+if (isset($_SERVER['PATH_INFO'])):
+	$cari =  explode('/',$_SERVER['PATH_INFO']);
+	/*semakPembolehubah($cari[1],'pilih');
+	if($cari[1] == 'json'):
+		$pilih = isset($cari[2]) ? $cari[2] : null;
+		binaJson($data,$pilih);
+	else:
+		panggilDataTable($data,$cari[1]);# panggil fungsi
+	endif;//*/
+else:
+	panggilLink();# panggil fungsi
+endif;
+#--------------------------------------------------------------------------------------------------
 
-echo "
-$url/index/utama
-$url/index/bulan/
-$url/index/suhu
-$url/user/baru
-$url/user/ubah
-$url/user/buang
-";
+
 
 
